@@ -1,3 +1,5 @@
+# http://adventofcode.com/2016/day/3
+
 from itertools import combinations
 from pandas import read_fwf
 
@@ -24,3 +26,12 @@ for row in data.iterrows():
         possible_triangles += 1
 
 print('Number of possible triangles: {}'.format(possible_triangles))
+
+# triangles defined vertically
+pos_tri = 0
+for col in data.columns:
+    for t in range(0, len(data), 3):
+        if check_tri(list(data[col][t:t+3])):
+            pos_tri += 1
+
+print('Number of possible triangles: {}'.format(pos_tri))

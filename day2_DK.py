@@ -1,3 +1,5 @@
+# http://adventofcode.com/2016/day/2
+
 import numpy as np
 
 pad = np.arange(1, 10 ,1 ).reshape((3,3))
@@ -26,3 +28,34 @@ for n in note:
     code.append(move(code[-1], n))
 
 print(code[1:])
+
+# part 2, keyboard layout
+pad2 = {
+    1: {'D': 3},
+    2: {'R': 3, 'D': 6},
+    3: {'R': 4, 'L': 2, 'U': 1, 'D': 7},
+    4: {'L': 3, 'D': 8},
+    5: {'R': 6},
+    6: {'L': 5, 'R':7, 'U': 2, 'D': 'A'},
+    7: {'L': 6, 'R':8, 'U': 3, 'D': 'B'},
+    8: {'L': 7, 'R':9, 'U': 4, 'D': 'C'},
+    9: {'L': 8},
+    'A': {'R': 'B', 'U': 6},
+    'B': {'L': 'A', 'R': 'C', 'U': 7, 'D': 'D'},
+    'C': {'L': 'B', 'U': 8},
+    'D': {'U': 'B'}
+}
+
+def move2(current, moves):
+    for m in moves:
+        try:
+            current = pad2[current][m]
+        except KeyError:
+            pass
+    return current
+
+code2 = [5]
+for n in note:
+    code2.append(move2(code2[-1], n))
+
+print(code2[1:])
